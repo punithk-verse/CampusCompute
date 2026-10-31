@@ -6,7 +6,7 @@ typedef enum{
 } job_status_t;
 
 typedef struct{
-    int job_id;
+    int process_id;
     int arrival_time;
     int burst_time;
     int priority;

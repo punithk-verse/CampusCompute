@@ -14,14 +14,14 @@ int add_job(job_t jobs[],int *count){
         return 0;
     }
     job_t new_job;
-    printf("enter job id :");
-    if (scanf("%d", &new_job.job_id) != 1 || new_job.job_id < 0) {
-        printf("Invalid Job ID.\n");
+    printf("Enter Process ID :");
+    if (scanf("%d", &new_job.process_id) != 1 || new_job.process_id < 0) {
+        printf("Invalid Process ID.\n");
         return 0;
     }
     for(int i=0;i<*count;i++){
-        if(jobs[i].job_id==new_job.job_id){
-            printf("Error:Duplicate JOB ID \n");
+        if(jobs[i].process_id==new_job.process_id){
+            printf("Error: Duplicate Process ID. \n");
             return 0;
         }
     }
@@ -36,7 +36,7 @@ int add_job(job_t jobs[],int *count){
         printf("Invalid Burst Time.\n");
         return 0;
     }
-    printf("Enter Priority: ");
+    printf("Enter Priority(only for non-preemptive priority scheduling ): ");
     if (scanf("%d", &new_job.priority) != 1 ||
         new_job.priority < 0) {
         printf("Invalid Priority.\n");
@@ -54,7 +54,7 @@ void display_jobs(job_t jobs[],int count){
         printf("no job avialble \n");
         return;
     }
-    printf("\nJob ID   Arrival   Burst   Priority   Remaining   Status\n");
+    printf("\nProcess ID   Arrival   Burst   Priority   Remaining   Status\n");
 
    for (int i = 0; i < count; i++) {
 
@@ -78,7 +78,7 @@ void display_jobs(job_t jobs[],int count){
         }
 
         printf("%d        %d         %d       %d          %d           %s\n",
-               jobs[i].job_id,
+               jobs[i].process_id,
                jobs[i].arrival_time,
                jobs[i].burst_time,
                jobs[i].priority,
