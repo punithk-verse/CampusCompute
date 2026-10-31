@@ -1,0 +1,1 @@
+void fcfs(job_t jobs[],int count);
