@@ -16,7 +16,6 @@ void fcfs(job_t jobs[],int count){
     }
 
     int current_time=0;
-    int start_time[MAX_JOBS];
     job_t temp;
 
     for(int i=0;i<count-1;i++){
@@ -37,7 +36,7 @@ void fcfs(job_t jobs[],int count){
             current_time=scheduled[i].arrival_time;
         }
 
-        start_time[i]=current_time;
+       
 
         scheduled[i].status=JOB_RUNNING;
 
