@@ -22,12 +22,12 @@ void priority_scheduling(job_t jobs[], int count) {
 
     int current_time = 0;
     int completed = 0;
-    int total_tat = 0;
-    int total_wt = 0;
+    long long total_tat = 0;
+    long long total_wt = 0;
 
-    int gantt_process[MAX_JOBS];
-    int gantt_start[MAX_JOBS];
-    int gantt_end[MAX_JOBS];
+    int gantt_process[MAX_JOBS * 2];
+    int gantt_start[MAX_JOBS * 2];
+    int gantt_end[MAX_JOBS * 2];
     int gantt_count = 0;
 
     while(completed < count) {
@@ -45,7 +45,24 @@ void priority_scheduling(job_t jobs[], int count) {
         }
 
         if(selected == -1) {
-            current_time++;
+            int next_arrival = -1;
+
+            for(int i = 0; i < count; i++) {
+                if(scheduled[i].status != JOB_COMPLETED &&
+                   (next_arrival == -1 ||
+                    scheduled[i].arrival_time <
+                        scheduled[next_arrival].arrival_time)) {
+                    next_arrival = i;
+                }
+            }
+
+            if(next_arrival != -1) {
+                gantt_process[gantt_count] = -1;
+                gantt_start[gantt_count] = current_time;
+                current_time = scheduled[next_arrival].arrival_time;
+                gantt_end[gantt_count] = current_time;
+                gantt_count++;
+            }
             continue;
         }
 
@@ -85,7 +102,11 @@ void priority_scheduling(job_t jobs[], int count) {
     printf("%d\n", gantt_end[gantt_count - 1]);
 
     for(int i = 0; i < gantt_count; i++) {
-        printf("| P%d      ", scheduled[gantt_process[i]].process_id);
+        if(gantt_process[i] == -1) {
+            printf("| Idle    ");
+        } else {
+            printf("| P%d      ", scheduled[gantt_process[i]].process_id);
+        }
     }
 
     printf("|\n");

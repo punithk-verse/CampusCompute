@@ -1,2 +1,3 @@
 *.o
 /src/campuscompute
+/build/
