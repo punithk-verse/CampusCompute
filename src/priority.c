@@ -111,10 +111,11 @@ void priority_scheduling(job_t jobs[], int count) {
 
     printf("|\n");
 
-    printf("\nPID\tAT\tBT\tPriority\tCT\tTAT\tWT\n");
+    printf("\n%-8s %-8s %-8s %-10s %-8s %-8s %-8s\n",
+           "PID", "AT", "BT", "Priority", "CT", "TAT", "WT");
 
     for(int i = 0; i < count; i++) {
-        printf("P%d\t%d\t%d\t%d\t\t%d\t%d\t%d\n",
+        printf("P%-7d %-8d %-8d %-10d %-8d %-8d %-8d\n",
             scheduled[i].process_id,
             scheduled[i].arrival_time,
             scheduled[i].burst_time,

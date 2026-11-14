@@ -95,7 +95,7 @@ static void *logger_consumer(void *argument)
         }
 
         if (!item.stop) {
-            printf("[logger] %s\n", item.message);
+            printf("[logger] Consumer dequeued: %s\n", item.message);
         }
     } while (!item.stop);
 
